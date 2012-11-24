@@ -11,7 +11,7 @@ import exceptions.NenhumServidorDisponivelException;
 import exceptions.ObjetoNaoEncontradoException;
 
 
-public class RegistroImpl extends UnicastRemoteObject implements InterfaceRegistro{
+public class RegistroImpl extends UnicastRemoteObject implements InterfaceRegistro {
 	
 	private ObjectContainerAndServers instacia;
 	
