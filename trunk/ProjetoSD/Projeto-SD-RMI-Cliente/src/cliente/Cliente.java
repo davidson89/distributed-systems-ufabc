@@ -20,10 +20,9 @@ public class Cliente {
 	{
 		
 	}
+	
 	String procura(String nome)
 	{
-		
-	
 			try {
 				ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);		
 				return  this.ConexaoControler.procura(nome);
@@ -32,8 +31,7 @@ public class Cliente {
 			} catch (NenhumServidorDisponivelException e) {
 				System.out.println("Nenhum servidor de objetos está disponivel no momento");
 			} catch (ObjetoNaoEncontradoException e) {
-				System.out.println("Objeto de nome: " + nome + " não pode ser encontrado.");
-				
+				System.out.println("Objeto de nome: " + nome + " não pode ser encontrado.");	
 			} catch (MalformedURLException e) {
 				System.out.println("Endereço incorreto ou mal formado.");
 			} catch (NotBoundException e) {
@@ -41,14 +39,41 @@ public class Cliente {
 				
 			}
    return "";
-	}	
+}	
+
 	String[] lista()
 	{
-		return new String[1];
+		String[] retorno = null;
+		try {
+			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);
+			retorno=  ConexaoControler.lista();	
+		} catch (MalformedURLException e) {
+			System.out.println("Endereço incorreto ou mal formado.");
+		} catch (RemoteException e) {
+			System.out.println("Erro de conexão");
+		} catch (NotBoundException e) {
+			System.out.println("não foi possível criar conexão com servidor no endereço: " + linkController);
+		} catch (NenhumServidorDisponivelException e) {
+			System.out.println("Nenhum servidor de objetos está disponivel no momento");	
+		}	
+		return retorno;
 	} 
 	void apaga(String nome)
 	{
-		
+		try {
+			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);
+			ConexaoControler.apaga(nome);
+		} catch (MalformedURLException e) {
+			System.out.println("Endereço incorreto ou mal formado.");
+		} catch (RemoteException e) {
+			System.out.println("Erro de conexão");
+				} catch (NotBoundException e) {
+			System.out.println("Erro de conexão");
+		} catch (NenhumServidorDisponivelException e) {
+			System.out.println("Nenhum servidor de objetos está disponivel no momento");	
+	    } catch (ObjetoNaoEncontradoException e) {
+			System.out.println("Objeto de nome: " + nome + " não pode ser encontrado.");
+		}
 		
 	} 
 	Object recupera(String nome)
@@ -69,7 +94,6 @@ public class Cliente {
 			
 		} catch (ObjetoNaoEncontradoException e) {
 			System.out.println("Objeto de id: " + campos[0] + " não pode ser encontrado.");
-			
 		}
 		return retorno;
 	}
