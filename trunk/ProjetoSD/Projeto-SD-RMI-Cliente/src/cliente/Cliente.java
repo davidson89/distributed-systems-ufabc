@@ -11,16 +11,10 @@ import java.rmi.RemoteException;
 public class Cliente {
 	InterfaceControlador ConexaoControler;
 	InterfaceAcesso ConexaoServidor;
+	String linkController;
 	public Cliente(String linkController)
 	{
-		try{
-		ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);
-		}catch(Exception ex)
-		{
-			
-		}
-		
-		
+		   this.linkController = linkController;
 	}
 	void armazena(String nome, Object obj)
 	{
@@ -31,17 +25,20 @@ public class Cliente {
 		
 	
 			try {
+				ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);		
 				return  this.ConexaoControler.procura(nome);
-				
 			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Erro de conexão");
 			} catch (NenhumServidorDisponivelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Nenhum servidor de objetos está disponivel no momento");
 			} catch (ObjetoNaoEncontradoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println("Objeto de nome: " + nome + " não pode ser encontrado.");
+				
+			} catch (MalformedURLException e) {
+				System.out.println("Endereço incorreto ou mal formado.");
+			} catch (NotBoundException e) {
+				System.out.println("não foi possível criar conexão com servidor no endereço: " + linkController);
+				
 			}
    return "";
 	}	
@@ -49,26 +46,30 @@ public class Cliente {
 	{
 		return new String[1];
 	} 
-	void apaga(String nome){} 
+	void apaga(String nome)
+	{
+		
+		
+	} 
 	Object recupera(String nome)
 	{
 		String campos[] = nome.split("@");
 		Object  retorno= null;
 		try {
 			ConexaoServidor = (InterfaceAcesso)Naming.lookup(campos[1]);
-			  retorno = ConexaoServidor.recupera(campos[1]);
+		    retorno = ConexaoServidor.recupera(campos[1]);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Endereço incorreto ou mal formado.");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Erro de conexão");
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("não foi possível criar conexão com servidor no endereço: " + campos[1]);
+			
 		} catch (ObjetoNaoEncontradoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Objeto de id: " + campos[0] + " não pode ser encontrado.");
+			
 		}
 		return retorno;
 	}
