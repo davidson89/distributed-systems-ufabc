@@ -13,7 +13,7 @@ public interface InterfaceControlador extends Remote
   String procura(String nome) 
      throws RemoteException, NenhumServidorDisponivelException, ObjetoNaoEncontradoException;
   String[] lista() 
-     throws RemoteException, NenhumServidorDisponivelException;
+     throws RemoteException;
   void apaga(String nome) 
      throws RemoteException, NenhumServidorDisponivelException, ObjetoNaoEncontradoException;
 }
