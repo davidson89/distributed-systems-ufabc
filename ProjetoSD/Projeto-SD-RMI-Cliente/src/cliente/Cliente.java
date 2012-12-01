@@ -64,9 +64,7 @@ public class Cliente {
 			System.out.println("Erro de conexão");
 		} catch (NotBoundException e) {
 			System.out.println("não foi possível criar conexão com servidor no endereço: " + linkController);
-		} catch (NenhumServidorDisponivelException e) {
-			System.out.println("Nenhum servidor de objetos está disponivel no momento");	
-		}	
+		} 
 		return retorno;
 	} 
 	void apaga(String nome)
@@ -93,7 +91,7 @@ public class Cliente {
 		Object  retorno= null;
 		try {
 			ConexaoServidor = (InterfaceAcesso)Naming.lookup(campos[1]);
-		    retorno = ConexaoServidor.recupera(campos[1]);
+		    retorno = ConexaoServidor.recupera(Integer.parseInt(campos[0]));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Endereço incorreto ou mal formado.");
