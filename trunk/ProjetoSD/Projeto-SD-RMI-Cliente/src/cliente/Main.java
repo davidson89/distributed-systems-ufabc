@@ -1,7 +1,7 @@
 package cliente;
 
 public class Main {
-private static final String ENDERECO ="rmi://localhost/controlador";
+private static final String ENDERECO ="rmi://localhost:2029/controlador";
 	
 	
 	/**
@@ -14,11 +14,11 @@ private static final String ENDERECO ="rmi://localhost/controlador";
 		
 		while (true){
 		
-			cliente.armazena("teste", new Arquivo("teste"));
+		//	cliente.armazena("teste", new Arquivo("teste"));
 			
-			  espera(3000);
 
-		    String[] lista =cliente.lista();
+
+		    String[] lista = (String[]) cliente.lista();
 		   
 		    for(int i=0;i<lista.length;i++)
 		    {

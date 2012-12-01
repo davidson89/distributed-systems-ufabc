@@ -5,12 +5,16 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 public class ServidorRun {
 
-	private static final String URL_REGISTER_SERVICE = "rmi://localhost/registro";
 	
-	private static final String URL_REPLICACAO_SERVICE = "rmi://localhost/replicacao";
+	private static final String PORT_REGISTRO = "2028";
+	private static final String PORT_REPLICAO = "2030";
+	private static final String URL_REGISTER_SERVICE = "rmi://localhost:"+PORT_REGISTRO+"/registro";
+	
+	private static final String URL_REPLICACAO_SERVICE = "rmi://localhost:"+PORT_REPLICAO+"/replicacao";
 
 	public ServidorRun() {
 		this.startRegisterService();
@@ -29,6 +33,7 @@ public class ServidorRun {
 		try {
 			ReplicacaoImpl replicacaoImpl = new ReplicacaoImpl();
 			System.out.println("Disponibilizando serviço de replicação....");
+			LocateRegistry.createRegistry(Integer.parseInt(PORT_REPLICAO));
 			Naming.rebind(URL_REPLICACAO_SERVICE, replicacaoImpl);
 			System.out.println("Serviço Disponivel");
 		} catch (RemoteException e) {
