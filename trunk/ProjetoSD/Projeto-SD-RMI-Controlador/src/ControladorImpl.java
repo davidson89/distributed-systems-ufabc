@@ -38,8 +38,12 @@ public class ControladorImpl extends UnicastRemoteObject implements InterfaceCon
 	@Override
 	public void armazena(String key, Object objeto) throws RemoteException,
 			NenhumServidorDisponivelException {
+		if(this.instance.getTodosServidores().isEmpty()) {
+			throw new NenhumServidorDisponivelException();
+		}
+
 		int id = this.instance.guardaObjeto(key, objeto);
-		for(String servidor : this.instance.getServidoresDisp()) {
+		for(String servidor : this.instance.getTodosServidores()) {
 			try {
 				this.interfaceReplicao = (InterfaceReplicacao) Naming.lookup("rmi://"+ servidor +"/replicacao");
 			} catch (MalformedURLException e) {

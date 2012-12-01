@@ -16,6 +16,8 @@ public class ObjectContainerAndServers {
 	private Queue<String> servidoresDisp = new PriorityQueue<String>();
 	
 	private List<String> servidoresEmUso = new ArrayList<String>();
+	
+	private List<String> todosServidores = new ArrayList<String>();
 
 	private static ObjectContainerAndServers instanceObjectCont;
 
@@ -53,7 +55,8 @@ public class ObjectContainerAndServers {
 
 	public void addServidorDisp(String ip) {
 		System.out.println("Adicionando novo servidor na fila de servidores disponiveis...");
-		servidoresDisp.add(ip);
+		this.servidoresDisp.add(ip);
+		this.todosServidores.add(ip);
 		System.out.println("Servidor adicionado!");
 	}
 	
@@ -72,8 +75,15 @@ public class ObjectContainerAndServers {
 	public void excluirServidor(String servidor){
 		this.servidoresDisp.remove(servidor);
 		this.servidoresEmUso.remove(servidor);
+		this.todosServidores.remove(servidor);
 	}
 	
+	public final List<String> getServidoresEmUso() {
+		return servidoresEmUso;
+	}
 	
+	public List<String> getTodosServidores() {
+		return todosServidores;
+	}
 
 }
