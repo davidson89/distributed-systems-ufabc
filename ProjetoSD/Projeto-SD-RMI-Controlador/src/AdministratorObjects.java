@@ -1,3 +1,4 @@
+import java.awt.geom.Area;
 import exceptions.ObjetoNaoEncontradoException;
 
 
@@ -18,5 +19,16 @@ public class AdministratorObjects {
 		System.out.println("Objeto encontrado.");
 		
 		return this.objectServers.getMapKeyId().get(key).intValue();
+	}
+	
+	public String[] getObjetosCadastrados(){
+		System.out.println("Verificando se existe objetos cadastrados...");
+		int size = this.objectServers.getMapKeyId().size();
+		if(size == 0){
+			System.out.println("Não exite objetos cadastrados.");
+			return new String[0];
+		}
+		System.out.println("Retornando lista de objetos cadastrados.");
+		return (String[]) this.objectServers.getMapKeyId().keySet().toArray(new String[size]);
 	}
 }
