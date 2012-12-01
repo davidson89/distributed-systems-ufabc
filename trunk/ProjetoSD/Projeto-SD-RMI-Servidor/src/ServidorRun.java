@@ -84,7 +84,7 @@ public class ServidorRun {
 
 		System.out.println("Solicitando registro com ip: " + ToolsHelp.catchIpMachine() + "...");
 		try {
-			replicacao.registraServidor(ToolsHelp.catchIpMachine() + ":" + PORT_REGISTRO);
+			replicacao.registraServidor(ToolsHelp.catchIpMachine() + ":" + PORT_REPLICAO);
 			System.out.println("Ip: " + ToolsHelp.catchIpMachine() + " registrado com sucesso!");
 		} catch (RemoteException e) {
 			System.out.println("Erro de Conexão ao registrar ip: " + ToolsHelp.catchIpMachine());
