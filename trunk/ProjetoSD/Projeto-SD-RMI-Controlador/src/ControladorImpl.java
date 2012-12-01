@@ -58,9 +58,8 @@ public class ControladorImpl extends UnicastRemoteObject implements InterfaceCon
 	}
 
 	@Override
-	public String[] lista() throws RemoteException,
-			NenhumServidorDisponivelException {
-		return this.admServers.getServersDisp();
+	public String[] lista() throws RemoteException {
+		return this.admObjects.getObjetosCadastrados();
 	}
 
 	@Override

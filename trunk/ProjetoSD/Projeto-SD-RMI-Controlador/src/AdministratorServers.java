@@ -24,16 +24,6 @@ public class AdministratorServers {
 		return servidorDisp;
 	}
 	
-	public String[] getServersDisp() throws NenhumServidorDisponivelException {
-		System.out.println("Verificando lista de servidores diponiveis...");
-		if(this.objectServers.getServidoresDisp().size() == 0){
-			System.out.println("Não exite servidores disponiveis no momentos");
-			throw new NenhumServidorDisponivelException();
-		}
-		System.out.println("Retornando lista de servidores disponiveis.");
-		return (String[]) this.objectServers.getMapKeyId().keySet().toArray();
-	}
-	
 	public void excluirServidor(String servidor) {
 		System.out.println("Excluindo servidor da lista de servidores disponiveis...");
 		this.objectServers.excluirServidor(servidor);
