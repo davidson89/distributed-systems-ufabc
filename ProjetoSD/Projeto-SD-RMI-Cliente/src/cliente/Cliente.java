@@ -18,13 +18,25 @@ public class Cliente {
 	}
 	void armazena(String nome, Object obj)
 	{
-		
+		try {
+			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);	 
+			  this.ConexaoControler.armazena(nome, obj);
+		} catch (RemoteException e) {
+			System.out.println("Erro de conexão");
+		} catch (NenhumServidorDisponivelException e) {
+			System.out.println("Nenhum servidor de objetos está disponivel no momento");
+		} catch (MalformedURLException e) {
+			System.out.println("Endereço incorreto ou mal formado.");
+		} catch (NotBoundException e) {
+			System.out.println("não foi possível criar conexão com servidor no endereço: " + linkController);
+			
+		}
+
 	}
-	
 	String procura(String nome)
 	{
 			try {
-				ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);		
+				ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);	
 				return  this.ConexaoControler.procura(nome);
 			} catch (RemoteException e) {
 				System.out.println("Erro de conexão");
@@ -40,7 +52,6 @@ public class Cliente {
 			}
    return "";
 }	
-
 	String[] lista()
 	{
 		String[] retorno = null;
