@@ -1,6 +1,8 @@
 package cliente;
 
-public class Arquivo {
+import java.io.Serializable;
+
+public class Arquivo implements Serializable {
 
 	public String nome= "testee";
 	

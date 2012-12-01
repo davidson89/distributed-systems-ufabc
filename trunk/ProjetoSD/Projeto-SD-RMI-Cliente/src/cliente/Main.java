@@ -12,25 +12,14 @@ private static final String ENDERECO ="rmi://localhost:2029/controlador";
 		
 		//loop principal
 		
-		while (true){
-		
-		//	cliente.armazena("teste", new Arquivo("teste"));
-			
 
-
-		    String[] lista = (String[]) cliente.lista();
-		   
-		    for(int i=0;i<lista.length;i++)
-		    {
-		    	System.out.println(lista[i]);
-		    }
-		    
+		    cliente.armazena("teste", new String("FF"));
 		    espera(3000);
+		    String t = cliente.procura("teste");
+		    System.out.println("end "+t);
 		    
-		  
 		    
-		    
-		}
+		
 	}
 
 public static void  espera(int tempo)

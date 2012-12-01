@@ -12,13 +12,16 @@ public class ServidorRun {
 	
 	private static final String PORT_REGISTRO = "2028";
 	private static final String PORT_REPLICAO = "2030";
+	private static final String PORT_ACESSO   = "2031";
 	private static final String URL_REGISTER_SERVICE = "rmi://localhost:"+PORT_REGISTRO+"/registro";
-	
 	private static final String URL_REPLICACAO_SERVICE = "rmi://localhost:"+PORT_REPLICAO+"/replicacao";
+	private static final String URL_ACESSO_SERVICE = "rmi://localhost:"+PORT_ACESSO+"/acesso";
+
 
 	public ServidorRun() {
 		this.startRegisterService();
 		this.startReplicaoService();
+		this.startAcessoService();
 	}
 
 	/**
@@ -29,6 +32,23 @@ public class ServidorRun {
 		new ServidorRun(); 
 	}
 
+	private void startAcessoService() {
+		try {
+		
+			AcessoImpl acessoimpl = new AcessoImpl();
+			System.out.println("Disponibilizando serviço de acesso....");
+			LocateRegistry.createRegistry(Integer.parseInt(PORT_ACESSO));
+			Naming.rebind(URL_ACESSO_SERVICE, acessoimpl);
+			System.out.println("Serviço Disponivel");
+		} catch (RemoteException e) {
+			System.out.println("Erro de Conexão.");
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			System.out.println("Endereço incorreto ou mal formado.");
+			e.printStackTrace();
+		}
+	}
+	
 	private void startReplicaoService() {
 		try {
 			ReplicacaoImpl replicacaoImpl = new ReplicacaoImpl();

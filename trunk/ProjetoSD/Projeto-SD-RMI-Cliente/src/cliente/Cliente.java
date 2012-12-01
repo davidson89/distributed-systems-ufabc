@@ -22,7 +22,7 @@ public class Cliente {
 			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);	 
 			  this.ConexaoControler.armazena(nome, obj);
 		} catch (RemoteException e) {
-			System.out.println("Erro de conexão");
+			System.out.println("Erro de conexão" + e.getMessage());
 		} catch (NenhumServidorDisponivelException e) {
 			System.out.println("Nenhum servidor de objetos está disponivel no momento");
 		} catch (MalformedURLException e) {
@@ -64,7 +64,8 @@ public class Cliente {
 			System.out.println("Erro de conexão");
 		} catch (NotBoundException e) {
 			System.out.println("não foi possível criar conexão com servidor no endereço: " + linkController);
-		} 
+		}	
+
 		return retorno;
 	} 
 	void apaga(String nome)
