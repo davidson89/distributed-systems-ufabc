@@ -6,6 +6,6 @@ import exceptions.ObjetoNaoEncontradoException;
 
 public interface InterfaceAcesso extends Remote
 {
-  Object recupera(String link)
+  Object recupera(int id)
      throws RemoteException, ObjetoNaoEncontradoException;
 }
