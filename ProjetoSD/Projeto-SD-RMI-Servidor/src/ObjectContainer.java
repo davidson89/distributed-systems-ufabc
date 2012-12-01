@@ -26,7 +26,11 @@ public class ObjectContainer {
 		this.mapIdObject.put(id, objeto);
 		System.out.println("Objeto armazenado com sucesso!");
 	}
+	public Object retornaObjeto(Integer id) {
+		System.out.println("Retornando objeto de id:" + String.valueOf(id) + "....");
+		return this.mapIdObject.get(id);
 	
+	}
 	
 	
 	
