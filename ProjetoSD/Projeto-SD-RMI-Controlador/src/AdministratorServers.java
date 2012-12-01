@@ -31,7 +31,7 @@ public class AdministratorServers {
 			throw new NenhumServidorDisponivelException();
 		}
 		System.out.println("Retornando lista de servidores disponiveis.");
-		return (String[]) this.objectServers.getServidoresDisp().toArray();
+		return (String[]) this.objectServers.getMapKeyId().keySet().toArray();
 	}
 	
 	public void excluirServidor(String servidor) {
