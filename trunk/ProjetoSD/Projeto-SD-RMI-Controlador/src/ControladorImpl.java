@@ -68,9 +68,9 @@ public class ControladorImpl extends UnicastRemoteObject implements InterfaceCon
 		int identificador = this.admObjects.verificaExistenciaObjeto(key);
 		
 		String link = String.valueOf(identificador);
-		link.concat("@rmi//");
-		link.concat(admServers.getServerDisp());
-		link.concat("/servidor");
+		link = link.concat("@rmi://");
+		link = link.concat(admServers.getServerDisp());
+		link = link.concat("/acesso");
 		
 		return link;
 	}

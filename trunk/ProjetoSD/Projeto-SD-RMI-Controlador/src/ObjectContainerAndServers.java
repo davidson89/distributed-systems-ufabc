@@ -54,14 +54,14 @@ public class ObjectContainerAndServers {
 	}
 
 	public void addServidorDisp(String ip) {
-		System.out.println("Adicionando novo servidor na fila de servidores disponiveis...");
+		System.out.println("Adicionando servidor de ip:" + ip +" na fila de servidores disponiveis...");
 		this.servidoresDisp.add(ip);
 		this.todosServidores.add(ip);
 		System.out.println("Servidor adicionado!");
 	}
 	
 	public void addServidorEmUso(String ip) {
-		System.out.println("Adicionando novo servidor na lista de servidores em uso...");
+		System.out.println("Adicionando servidor de ip:" + ip +" na lista de servidores em uso...");
 		servidoresEmUso.add(ip);
 		System.out.println("Servidor adicionado!");
 	}

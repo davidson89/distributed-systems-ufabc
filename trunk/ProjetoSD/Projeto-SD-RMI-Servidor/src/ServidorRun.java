@@ -82,7 +82,7 @@ public class ServidorRun {
 			e.printStackTrace();
 		}
 
-		System.out.println("Solicitando registro com ip: " + ToolsHelp.catchIpMachine() + "...");
+		System.out.println("Solicitando registro com ip: " + ToolsHelp.catchIpMachine() + " na porta:"+ PORT_REPLICAO +"...");
 		try {
 			replicacao.registraServidor(ToolsHelp.catchIpMachine() + ":" + PORT_REPLICAO);
 			System.out.println("Ip: " + ToolsHelp.catchIpMachine() + " registrado com sucesso!");
