@@ -57,7 +57,7 @@ public class Cliente {
 		String[] retorno = null;
 		try {
 			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);
-			retorno=  ConexaoControler.lista();	
+			retorno =  ConexaoControler.lista();	
 		} catch (MalformedURLException e) {
 			System.out.println("Endereço incorreto ou mal formado.");
 		} catch (RemoteException e) {
