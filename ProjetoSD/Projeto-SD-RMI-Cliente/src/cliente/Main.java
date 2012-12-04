@@ -10,7 +10,9 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Cliente cliente = new Cliente(ENDERECO);
-		
+	    TelaCliente t = new TelaCliente();
+	  
+		/*
 		try {
 			cliente.armazena("teste", new String("FF"));
 		} catch (ObjetoExistenteException e) {
@@ -37,7 +39,7 @@ public class Main {
 		for (int i = 0; i < lista.length; i++) {
 			System.out.println(lista[i]);
 		}
-
+*/
 		
 
 	}
