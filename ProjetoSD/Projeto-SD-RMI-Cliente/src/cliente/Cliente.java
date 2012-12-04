@@ -16,7 +16,7 @@ public class Cliente {
 	{
 		   this.linkController = linkController;
 	}
-	void armazena(String nome, Object obj)
+	void armazena(String nome, Object obj) throws ObjetoExistenteException
 	{
 		try {
 			ConexaoControler = (InterfaceControlador)Naming.lookup(linkController);	 

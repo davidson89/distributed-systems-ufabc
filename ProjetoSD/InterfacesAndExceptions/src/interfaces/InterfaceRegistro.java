@@ -6,6 +6,6 @@ import java.util.Map;
 
 public interface InterfaceRegistro extends Remote {
 
-	Map<Integer, Object> registraServidor(String ip) throws RemoteException;
+	Map<Integer, Object> registraServidor(String ip, String portAcesso) throws RemoteException;
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Set;
 
 public class ObjectContainerAndServers {
 
@@ -17,7 +18,7 @@ public class ObjectContainerAndServers {
 	
 	private List<String> servidoresEmUso = new ArrayList<String>();
 	
-	private List<String> todosServidores = new ArrayList<String>();
+	private Map<String, String> todosServidores = new HashMap<String, String>();
 
 	private static ObjectContainerAndServers instanceObjectCont;
 
@@ -53,10 +54,10 @@ public class ObjectContainerAndServers {
 		return servidoresDisp;
 	}
 
-	public void addServidorDisp(String ip) {
+	public void addServidorDisp(String ip, String portaAcess) {
 		System.out.println("Adicionando servidor de ip:" + ip +" na fila de servidores disponiveis...");
 		this.servidoresDisp.add(ip);
-		this.todosServidores.add(ip);
+		this.todosServidores.put(ip, portaAcess);
 		System.out.println("Servidor adicionado!");
 	}
 	
@@ -82,8 +83,12 @@ public class ObjectContainerAndServers {
 		return servidoresEmUso;
 	}
 	
-	public List<String> getTodosServidores() {
-		return todosServidores;
+	public Set<String> getTodosServidores() {
+		return todosServidores.keySet();
+	}
+	
+	public String getPortaServidor(String servidor) {
+		return this.todosServidores.get(servidor);
 	}
 
 }

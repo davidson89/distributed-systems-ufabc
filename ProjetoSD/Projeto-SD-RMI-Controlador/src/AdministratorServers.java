@@ -29,4 +29,11 @@ public class AdministratorServers {
 		this.objectServers.excluirServidor(servidor);
 		System.out.println("Servidor excluido");
 	}
+	
+	public String getURLAcesso(String servidor) {
+		String portaAcesso = this.objectServers.getPortaServidor(servidor);
+		String[] ip = servidor.split(":");
+		String url = ip[0] + ":" + portaAcesso;
+		return url;
+	}
 }

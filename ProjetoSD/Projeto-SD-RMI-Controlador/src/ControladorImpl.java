@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import exceptions.NenhumServidorDisponivelException;
+import exceptions.ObjetoExistenteException;
 import exceptions.ObjetoNaoEncontradoException;
 
 
@@ -37,7 +38,10 @@ public class ControladorImpl extends UnicastRemoteObject implements InterfaceCon
 
 	@Override
 	public void armazena(String key, Object objeto) throws RemoteException,
-			NenhumServidorDisponivelException {
+			NenhumServidorDisponivelException,  ObjetoExistenteException{
+		if(this.instance.getMapKeyId().containsKey(key)) {
+			throw new ObjetoExistenteException(key);
+		}
 		if(this.instance.getTodosServidores().isEmpty()) {
 			throw new NenhumServidorDisponivelException();
 		}
@@ -69,7 +73,8 @@ public class ControladorImpl extends UnicastRemoteObject implements InterfaceCon
 		
 		String link = String.valueOf(identificador);
 		link = link.concat("@rmi://");
-		link = link.concat(admServers.getServerDisp());
+		String serverDisp = admServers.getServerDisp();
+		link = link.concat(admServers.getURLAcesso(serverDisp));
 		link = link.concat("/acesso");
 		
 		return link;

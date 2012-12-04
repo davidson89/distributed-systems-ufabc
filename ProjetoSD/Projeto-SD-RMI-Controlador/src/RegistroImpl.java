@@ -21,8 +21,8 @@ public class RegistroImpl extends UnicastRemoteObject implements InterfaceRegist
 	}
 
 	@Override
-	public Map<Integer,Object> registraServidor(String ip) throws RemoteException {
-		this.instacia.addServidorDisp(ip);
+	public Map<Integer,Object> registraServidor(String ip, String porta) throws RemoteException {
+		this.instacia.addServidorDisp(ip, porta);
 		return this.instacia.getMapIdObject();
 	}
 	
