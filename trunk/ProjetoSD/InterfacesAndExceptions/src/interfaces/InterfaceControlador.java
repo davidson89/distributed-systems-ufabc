@@ -4,12 +4,13 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import exceptions.NenhumServidorDisponivelException;
+import exceptions.ObjetoExistenteException;
 import exceptions.ObjetoNaoEncontradoException;
 
 public interface InterfaceControlador extends Remote
 {
   void armazena(String nome, Object obj) 
-     throws RemoteException, NenhumServidorDisponivelException;
+     throws RemoteException, NenhumServidorDisponivelException, ObjetoExistenteException;
   String procura(String nome) 
      throws RemoteException, NenhumServidorDisponivelException, ObjetoNaoEncontradoException;
   String[] lista() 
