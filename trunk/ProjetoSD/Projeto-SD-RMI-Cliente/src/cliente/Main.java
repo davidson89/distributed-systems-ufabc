@@ -1,6 +1,6 @@
 package cliente;
 
-import exceptions.ObjetoExistenteException;
+
 
 public class Main {
 	private static final String ENDERECO = "rmi://localhost:2029/controlador";
@@ -9,9 +9,9 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Cliente cliente = new Cliente(ENDERECO);
-	    TelaCliente t = new TelaCliente();
-	  
+		
+	         TelaCliente t = new TelaCliente();
+	           t.setVisible(true);
 		/*
 		try {
 			cliente.armazena("teste", new String("FF"));
