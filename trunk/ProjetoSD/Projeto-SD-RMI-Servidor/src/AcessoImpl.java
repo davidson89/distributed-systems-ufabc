@@ -1,4 +1,5 @@
 import interfaces.InterfaceAcesso;
+import interfaces.InterfaceRegistro;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -8,11 +9,16 @@ import exceptions.ObjetoNaoEncontradoException;
 public class AcessoImpl extends UnicastRemoteObject implements InterfaceAcesso {
 
 	private ObjectContainer instacia;
+	
+	private InterfaceRegistro registroImpl;
+	
+	private String portaRegistro;
 
-	protected AcessoImpl() throws RemoteException {
+	protected AcessoImpl(InterfaceRegistro registroImpl, String portaRegistro) throws RemoteException {
 		super();
 		this.instacia = ObjectContainer.getInstancia();
-		// TODO Auto-generated constructor stub
+		this.registroImpl = registroImpl;
+		this.portaRegistro = portaRegistro;
 	}
 
 	@Override
@@ -20,9 +26,12 @@ public class AcessoImpl extends UnicastRemoteObject implements InterfaceAcesso {
 			ObjetoNaoEncontradoException {
 
 		Object ob = this.instacia.retornaObjeto(id);
-		if (ob == null)
+		if (ob == null) {
+			this.registroImpl.liberaServidorParaUso(ToolsHelp.catchIpMachine() + ":" + this.portaRegistro);
 			throw new ObjetoNaoEncontradoException("Objeto de id " + id
 					+ " não encontrado");
+		}
+		this.registroImpl.liberaServidorParaUso(ToolsHelp.catchIpMachine() + ":" + this.portaRegistro);
 		return ob;
 	}
 
