@@ -17,7 +17,7 @@ public class ControladorRun {
 	private static final String URL_CONTROLADOR_SERVICE= "rmi://localhost:"+ PORT_CONTROLADOR + "/controlador";
 	
 	public ControladorRun() {
-		 startRegisterService();
+		startRegisterService();
 		startControladorService();
 	}
 

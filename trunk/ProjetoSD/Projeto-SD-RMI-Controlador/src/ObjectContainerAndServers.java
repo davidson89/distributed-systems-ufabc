@@ -90,6 +90,11 @@ public class ObjectContainerAndServers {
 		return servidoresEmUso;
 	}
 	
+	public void liberaServidorParaUso(String servidor) {
+		this.servidoresEmUso.remove(servidor);
+		this.servidoresDisp.add(servidor);
+	}
+	
 	public Set<String> getTodosServidores() {
 		return todosServidores.keySet();
 	}

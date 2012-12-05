@@ -15,6 +15,8 @@ public class RegistroImpl extends UnicastRemoteObject implements InterfaceRegist
 	
 	private ObjectContainerAndServers instacia;
 	
+	private AdministratorServers admServer = new AdministratorServers();
+	
 	public RegistroImpl() throws RemoteException {
 		super();
 		this.instacia = ObjectContainerAndServers.getInstance();
@@ -25,5 +27,10 @@ public class RegistroImpl extends UnicastRemoteObject implements InterfaceRegist
 		this.instacia.addServidorDisp(ip, porta);
 		return this.instacia.getMapIdObject();
 	}
-	
+
+	@Override
+	public void liberaServidorParaUso(String endereco) {
+		this.admServer.liberaServidor(endereco);
+	}
+
 }
