@@ -6,22 +6,23 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.Map;
 
 public class ServidorRun {
 
 	
 	private static final String PORT_REGISTRO = "2028";
-	private static final String PORT_REPLICAO = "2040";
-	private static final String PORT_ACESSO   = "2041";
+	private static final String PORT_REPLICAO = "2131";
+	private static final String PORT_ACESSO   = "2132";
 	private static final String URL_REGISTER_SERVICE = "rmi://localhost:"+PORT_REGISTRO+"/registro";
 	private static final String URL_REPLICACAO_SERVICE = "rmi://localhost:"+PORT_REPLICAO+"/replicacao";
 	private static final String URL_ACESSO_SERVICE = "rmi://localhost:"+PORT_ACESSO+"/acesso";
 
 
 	public ServidorRun() {
-		this.startRegisterService();
+		InterfaceRegistro registerImpl = this.startRegisterService();
 		this.startReplicaoService();
-		this.startAcessoService();
+		this.startAcessoService(registerImpl);
 	}
 
 	/**
@@ -32,10 +33,10 @@ public class ServidorRun {
 		new ServidorRun(); 
 	}
 
-	private void startAcessoService() {
+	private void startAcessoService(InterfaceRegistro registerImpl) {
 		try {
 		
-			AcessoImpl acessoimpl = new AcessoImpl();
+			AcessoImpl acessoimpl = new AcessoImpl(registerImpl, PORT_REPLICAO);
 			System.out.println("Disponibilizando serviço de acesso....");
 			LocateRegistry.createRegistry(Integer.parseInt(PORT_ACESSO));
 			Naming.rebind(URL_ACESSO_SERVICE, acessoimpl);
@@ -65,11 +66,11 @@ public class ServidorRun {
 		}
 	}
 
-	private void startRegisterService() {
-		InterfaceRegistro replicacao = null;
+	private InterfaceRegistro startRegisterService() {
+		InterfaceRegistro register = null;
 		try {
 			System.out.println("Iniciando serviço de registro de servidor....");
-			replicacao = (InterfaceRegistro) Naming.lookup(URL_REGISTER_SERVICE);
+			register = (InterfaceRegistro) Naming.lookup(URL_REGISTER_SERVICE);
 			System.out.println("Serviço iniciado com sucesso!");
 		} catch (RemoteException e) {
 			System.out.println("Erro de Conexão.");
@@ -84,12 +85,14 @@ public class ServidorRun {
 
 		System.out.println("Solicitando registro com ip: " + ToolsHelp.catchIpMachine() + " na porta:"+ PORT_REPLICAO +"...");
 		try {
-			replicacao.registraServidor(ToolsHelp.catchIpMachine() + ":" + PORT_REPLICAO, PORT_ACESSO);
+			Map<Integer, Object> mapaAtual = register.registraServidor(ToolsHelp.catchIpMachine() + ":" + PORT_REPLICAO, PORT_ACESSO);
+			ObjectContainer.getInstancia().setMapIdObject(mapaAtual);
 			System.out.println("Ip: " + ToolsHelp.catchIpMachine() + " registrado com sucesso!");
 		} catch (RemoteException e) {
 			System.out.println("Erro de Conexão ao registrar ip: " + ToolsHelp.catchIpMachine());
 			e.printStackTrace();
 		}
+		return register;
 	}
 
 }

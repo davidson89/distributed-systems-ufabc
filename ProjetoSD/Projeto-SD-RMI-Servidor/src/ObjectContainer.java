@@ -32,7 +32,8 @@ public class ObjectContainer {
 	
 	}
 	
-	
-	
+	public void setMapIdObject(Map<Integer, Object> mapIdObject) {
+		this.mapIdObject = mapIdObject;
+	}
 
 }
