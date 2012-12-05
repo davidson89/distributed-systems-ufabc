@@ -50,6 +50,13 @@ public class ObjectContainerAndServers {
 		return id.intValue();
 	}
 	
+	public void removeObjeto(String key) {
+		Integer id = this.mapKeyId.get(key);
+		this.mapKeyId.remove(key);
+		this.mapIdObject.remove(id);
+		System.out.println("Objeto de chave " + key + " removido do controlador...");
+	}
+	
 	public final Queue<String> getServidoresDisp() {
 		return servidoresDisp;
 	}
